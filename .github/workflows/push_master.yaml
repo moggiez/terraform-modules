@@ -1,4 +1,4 @@
-name: "Validate scripts"
+name: "Validate scripts PUSH Master"
 
 on:
   push:
