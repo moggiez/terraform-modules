@@ -27,7 +27,7 @@ resource "aws_api_gateway_integration" "_" {
 }
 
 module "proxy_cors" {
-  source          = "../api_gateway_enable_cors"
+  source          = "github.com/moggiez/terraform-modules/api_gateway_enable_cors"
   api_id          = var.api.id
   api_resource_id = aws_api_gateway_resource._.id
 }

@@ -6,7 +6,7 @@ resource "aws_iam_policy" "dynamodb_access_policy" {
 }
 
 module "lambda_for_api" {
-  source         = "../lambda_with_dynamo"
+  source         = "github.com/moggiez/terraform-modules/lambda_with_dynamo"
   s3_bucket      = var.bucket
   dist_dir       = var.dist_dir
   dist_version   = var.dist_version
@@ -17,8 +17,7 @@ module "lambda_for_api" {
 }
 
 module "gateway_to_lambda" {
-  source             = "../lambda_gateway"
-  name               = "${var.name}_API"
+  source             = "github.com/moggiez/terraform-modules/lambda_gateway"
   api                = var.api
   lambda             = module.lambda_for_api.lambda
   http_methods       = var.http_methods
@@ -27,7 +26,7 @@ module "gateway_to_lambda" {
 }
 
 module "gateway_cors" {
-  source          = "../api_gateway_enable_cors"
+  source          = "github.com/moggiez/terraform-modules/api_gateway_enable_cors"
   api_id          = var.api.id
   api_resource_id = module.gateway_to_lambda.api_resource.id
 }
