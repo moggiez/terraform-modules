@@ -9,7 +9,6 @@ module "lambda_for_api" {
   source         = "git@github.com:moggiez/terraform-modules.git//lambda_with_dynamo"
   s3_bucket      = var.bucket
   dist_dir       = var.dist_dir
-  dist_version   = var.dist_version
   name           = "${var.name}_api"
   dynamodb_table = var.dynamodb_table
   policies       = [aws_iam_policy.dynamodb_access_policy.arn]

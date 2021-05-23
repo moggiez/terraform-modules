@@ -1,10 +1,10 @@
 
 resource "aws_s3_bucket_object" "lambda_s3_object" {
   bucket = var.s3_bucket.id
-  key    = "${var.key}.${var.dist_version}.zip"
+  key    = "${var.key}.zip"
   acl    = "private"
-  source = "${var.dist_dir}/${var.key}.${var.dist_version}.zip"
-  etag   = filemd5("${var.dist_dir}/${var.key}.${var.dist_version}.zip")
+  source = "${var.dist_dir}/${var.key}.zip"
+  etag   = filemd5("${var.dist_dir}/${var.key}.zip")
 }
 
 resource "aws_lambda_function" "moggiez_worker_fn" {
@@ -15,7 +15,7 @@ resource "aws_lambda_function" "moggiez_worker_fn" {
 
   handler          = "index.handler"
   runtime          = "nodejs14.x"
-  source_code_hash = filebase64sha256("${var.dist_dir}/${var.key}.${var.dist_version}.zip")
+  source_code_hash = filebase64sha256("${var.dist_dir}/${var.key}.zip")
 
   role = aws_iam_role.lambda_exec.arn
 }

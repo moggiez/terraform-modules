@@ -17,11 +17,6 @@ variable "path_part" {
 variable "bucket" {
 }
 
-variable "dist_version" {
-  type    = string
-  default = "1.0.0"
-}
-
 variable "dist_dir" {
   type    = string
   default = "../../dist"

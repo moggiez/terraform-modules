@@ -1,9 +1,9 @@
 resource "aws_s3_bucket_object" "_" {
   bucket = var.s3_bucket.id
-  key    = "${var.name}.${var.dist_version}.zip"
+  key    = "${var.name}.zip"
   acl    = "private"
-  source = "${var.dist_dir}/${var.name}.${var.dist_version}.zip"
-  etag   = filemd5("${var.dist_dir}/${var.name}.${var.dist_version}.zip")
+  source = "${var.dist_dir}/${var.name}.zip"
+  etag   = filemd5("${var.dist_dir}/${var.name}.zip")
 }
 
 resource "aws_lambda_function" "_" {
@@ -13,7 +13,7 @@ resource "aws_lambda_function" "_" {
 
   handler          = "index.handler"
   runtime          = "nodejs14.x"
-  source_code_hash = filebase64sha256("${var.dist_dir}/${var.name}.${var.dist_version}.zip")
+  source_code_hash = filebase64sha256("${var.dist_dir}/${var.name}.zip")
 
   layers = var.layers != null ? var.layers : []
 

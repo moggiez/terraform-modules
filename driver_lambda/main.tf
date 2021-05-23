@@ -1,9 +1,9 @@
 resource "aws_s3_bucket_object" "driver_lambda_s3_object" {
   bucket = var.s3_bucket.id
-  key    = "driver_lambda.${var.dist_version}.zip"
+  key    = "driver_lambda.zip"
   acl    = "private"
-  source = "${var.dist_dir}/driver_lambda.${var.dist_version}.zip"
-  etag   = filemd5("${var.dist_dir}/driver_lambda.${var.dist_version}.zip")
+  source = "${var.dist_dir}/driver_lambda.zip"
+  etag   = filemd5("${var.dist_dir}/driver_lambda.zip")
 }
 
 resource "aws_lambda_function" "moggiez_driver_fn" {
@@ -14,7 +14,7 @@ resource "aws_lambda_function" "moggiez_driver_fn" {
 
   handler          = "index.handler"
   runtime          = "nodejs14.x"
-  source_code_hash = filebase64sha256("${var.dist_dir}/driver_lambda.${var.dist_version}.zip")
+  source_code_hash = filebase64sha256("${var.dist_dir}/driver_lambda.zip")
 
   role = aws_iam_role.lambda_exec.arn
 }
