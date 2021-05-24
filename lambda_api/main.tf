@@ -10,7 +10,6 @@ module "lambda_for_api" {
   s3_bucket      = var.bucket
   dist_dir       = var.dist_dir
   name           = "${var.name}_api"
-  dynamodb_table = var.dynamodb_table
   policies       = [aws_iam_policy.dynamodb_access_policy.arn]
   layers         = var.layers
 }
