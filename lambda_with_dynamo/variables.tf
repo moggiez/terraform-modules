@@ -9,10 +9,6 @@ variable "name" {
   type = string
 }
 
-variable "dynamodb_table" {
-  type = string
-}
-
 variable "policies" {
   type = list(string)
 }
