@@ -10,6 +10,7 @@ resource "aws_lambda_function" "_" {
   function_name = var.name
   s3_bucket     = var.s3_bucket.bucket
   s3_key        = aws_s3_bucket_object._.key
+  timeout       = var.timeout
 
   handler          = "index.handler"
   runtime          = "nodejs14.x"

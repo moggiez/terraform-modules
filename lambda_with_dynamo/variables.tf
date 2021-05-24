@@ -20,3 +20,8 @@ variable "policies" {
 variable "layers" {
   default = null
 }
+
+variable "timeout" {
+  type    = number
+  default = 3
+}
