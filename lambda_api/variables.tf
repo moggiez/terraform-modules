@@ -37,3 +37,8 @@ variable "authorizer" {
 variable "layers" {
   default = null
 }
+
+variable "policies" {
+  type    = list(any)
+  default = []
+}

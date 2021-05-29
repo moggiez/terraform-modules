@@ -6,12 +6,12 @@ resource "aws_iam_policy" "dynamodb_access_policy" {
 }
 
 module "lambda_for_api" {
-  source         = "git@github.com:moggiez/terraform-modules.git//lambda_with_dynamo"
-  s3_bucket      = var.bucket
-  dist_dir       = var.dist_dir
-  name           = "${var.name}_api"
-  policies       = [aws_iam_policy.dynamodb_access_policy.arn]
-  layers         = var.layers
+  source    = "git@github.com:moggiez/terraform-modules.git//lambda_with_dynamo"
+  s3_bucket = var.bucket
+  dist_dir  = var.dist_dir
+  name      = "${var.name}_api"
+  policies  = concat(var.policies, [aws_iam_policy.dynamodb_access_policy.arn])
+  layers    = var.layers
 }
 
 module "gateway_to_lambda" {
