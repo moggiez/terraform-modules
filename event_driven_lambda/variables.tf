@@ -17,6 +17,10 @@ variable "policies" {
   type = list(any)
 }
 
+variable "layers" {
+  default = null
+}
+
 variable "timeout" {
   type    = number
   default = 3

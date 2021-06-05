@@ -17,6 +17,8 @@ resource "aws_lambda_function" "moggiez_worker_fn" {
   runtime          = "nodejs14.x"
   source_code_hash = filebase64sha256("${var.dist_dir}/${var.key}.zip")
 
+  layers = var.layers != null ? var.layers : []
+
   role = aws_iam_role.lambda_exec.arn
 }
 
