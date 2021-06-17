@@ -13,3 +13,7 @@ variable "api" {
 variable "api_stage_name" {
 
 }
+
+variable "certificate_arn" {
+  
+}
