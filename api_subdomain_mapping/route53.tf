@@ -1,12 +1,7 @@
-data "aws_route53_zone" "public" {
-  private_zone = false
-  name         = var.domain_name
-}
-
 resource "aws_route53_record" "_" {
   name    = aws_api_gateway_domain_name._.domain_name
   type    = "A"
-  zone_id = data.aws_route53_zone.public.zone_id
+  zone_id = var.hosted_zone_id
 
   alias {
     evaluate_target_health = true

@@ -15,5 +15,9 @@ variable "api_stage_name" {
 }
 
 variable "certificate_arn" {
-  
+
+}
+
+variable "hosted_zone_id"  {
+
 }
