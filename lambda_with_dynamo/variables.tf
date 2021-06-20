@@ -21,3 +21,7 @@ variable "timeout" {
   type    = number
   default = 3
 }
+
+variable "environment" {
+  type = string
+}

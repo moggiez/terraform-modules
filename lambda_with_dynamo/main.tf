@@ -19,6 +19,11 @@ resource "aws_lambda_function" "_" {
   layers = var.layers != null ? var.layers : []
 
   role = aws_iam_role._.arn
+  environment {
+    variables = {
+      env = var.environment != null ? var.environment : "local"
+    }
+  }
 }
 
 resource "aws_iam_role" "_" {

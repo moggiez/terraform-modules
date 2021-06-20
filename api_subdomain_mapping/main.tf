@@ -1,16 +1,3 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-  }
-}
-
-provider "aws" {
-  alias  = "acm_provider"
-  region = "us-east-1"
-}
-
 resource "aws_api_gateway_domain_name" "_" {
   certificate_arn = var.certificate_arn
   domain_name     = "${var.api_subdomain}.${var.domain_name}"

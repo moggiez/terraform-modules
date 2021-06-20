@@ -42,3 +42,7 @@ variable "policies" {
   type    = list(any)
   default = []
 }
+
+variable "environment" {
+  type = string
+}

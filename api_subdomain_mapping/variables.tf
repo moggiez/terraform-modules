@@ -18,6 +18,6 @@ variable "certificate_arn" {
 
 }
 
-variable "hosted_zone_id"  {
+variable "hosted_zone_id" {
 
 }
