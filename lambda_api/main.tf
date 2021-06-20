@@ -12,7 +12,7 @@ module "lambda_for_api" {
   name        = "${var.name}_api"
   policies    = concat(var.policies, [aws_iam_policy.dynamodb_access_policy.arn])
   layers      = var.layers
-  environment = local.environment
+  environment = var.environment
 }
 
 module "gateway_to_lambda" {
