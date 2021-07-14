@@ -11,6 +11,7 @@ variable "resource_path_part" {
 }
 
 variable "parent_resource" {
+  default = null
 }
 
 variable "http_methods" {
