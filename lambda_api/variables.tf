@@ -27,7 +27,8 @@ variable "http_methods" {
 }
 
 variable "dynamodb_table" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "authorizer" {

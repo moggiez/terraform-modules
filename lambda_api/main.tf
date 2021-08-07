@@ -3,6 +3,7 @@ resource "aws_iam_policy" "dynamodb_access_policy" {
   path = "/"
 
   policy = templatefile("templates/dynamo_access_policy.json", { table = var.dynamodb_table })
+  count  = var.dynamodb_table == null ? 0 : 1
 }
 
 module "lambda_for_api" {
