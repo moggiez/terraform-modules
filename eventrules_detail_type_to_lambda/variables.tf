@@ -21,7 +21,8 @@ variable "detail_types" {
   type = list(any)
 }
 
-variable "eventbus" {
+variable "eventbus_name" {
+  type = string
 }
 
 variable "lambda" {

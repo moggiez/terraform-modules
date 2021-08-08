@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "source_to_log" {
-  event_bus_name = var.eventbus.name
+  event_bus_name = var.eventbus_name
   name           = "${var.application}-source-${var.event_source}-to-logs"
   description    = "Catch all events on the event bus and log to CloudWatch Logs"
 
@@ -16,7 +16,7 @@ resource "aws_cloudwatch_event_rule" "source_to_log" {
 }
 
 resource "aws_cloudwatch_event_target" "catch_all_log" {
-  event_bus_name = var.eventbus.name
+  event_bus_name = var.eventbus_name
   rule           = aws_cloudwatch_event_rule.source_to_log.name
   target_id      = "MoggiezTestLogs_${var.event_source}"
   arn            = var.log_group.arn

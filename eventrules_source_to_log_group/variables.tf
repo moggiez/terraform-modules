@@ -8,7 +8,8 @@ variable "account" {
   description = "AWS account id"
 }
 
-variable "eventbus" {
+variable "eventbus_name" {
+  type = string
 }
 
 variable "event_source" {
