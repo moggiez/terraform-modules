@@ -17,8 +17,8 @@ variable "name" {
   type = string
 }
 
-variable "detail_types" {
-  type = list(any)
+variable "detail_type" {
+  type = string
 }
 
 variable "eventbus_name" {

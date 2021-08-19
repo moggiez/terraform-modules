@@ -6,7 +6,7 @@ resource "aws_cloudwatch_event_rule" "catch_all_lambda" {
   event_pattern = jsonencode(
     {
       "account" : ["${var.account}"],
-      "detail-type" : var.detail_types
+      "detail-type" : var.detail_type
     }
   )
 
@@ -18,12 +18,12 @@ resource "aws_cloudwatch_event_rule" "catch_all_lambda" {
 resource "aws_cloudwatch_event_target" "call_lambda" {
   event_bus_name = var.eventbus_name
   rule           = aws_cloudwatch_event_rule.catch_all_lambda.name
-  target_id      = "Target-${var.detail_types}"
+  target_id      = "Target-${var.detail_type}"
   arn            = var.lambda.arn
 }
 
 resource "aws_lambda_permission" "allow_eventbridge" {
-  statement_id  = "AllowExecutionFromCloudWatch-${var.detail_types}"
+  statement_id  = "AllowExecutionFromCloudWatch-${var.detail_type}"
   action        = "lambda:InvokeFunction"
   function_name = var.lambda.function_name
   principal     = "events.amazonaws.com"
