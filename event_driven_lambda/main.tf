@@ -7,7 +7,7 @@ resource "aws_s3_bucket_object" "lambda_s3_object" {
   etag   = filemd5("${var.dist_dir}/${var.key}.zip")
 }
 
-resource "aws_lambda_function" "moggiez_worker_fn" {
+resource "aws_lambda_function" "_" {
   function_name = var.function_name
   s3_bucket     = var.s3_bucket.bucket
   s3_key        = aws_s3_bucket_object.lambda_s3_object.key
@@ -19,40 +19,10 @@ resource "aws_lambda_function" "moggiez_worker_fn" {
 
   layers = var.layers != null ? var.layers : []
 
-  role = aws_iam_role.lambda_exec.arn
-}
+  role = aws_iam_role._.arn
 
-resource "aws_iam_policy" "eventbridge_events" {
-  name        = "eventbridge_access_${var.key}"
-  path        = "/"
-  description = "IAM policy for logging from a lambda"
-
-  policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Action" : "events:PutEvents",
-        "Resource" : "*"
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role" "lambda_exec" {
-  name = "moggiez_${var.key}_execution_role"
-  assume_role_policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Action" : "sts:AssumeRole",
-        "Principal" : {
-          "Service" : "lambda.amazonaws.com"
-        },
-        "Effect" : "Allow",
-        "Sid" : ""
-      }
-    ]
-  })
-  managed_policy_arns = concat(var.policies, [aws_iam_policy.eventbridge_events.arn])
+  depends_on = [
+    aws_iam_role_policy_attachment.lambda_logs,
+    aws_cloudwatch_log_group.cw_log_group,
+  ]
 }

@@ -24,22 +24,9 @@ resource "aws_lambda_function" "_" {
       env = var.environment != null ? var.environment : "local"
     }
   }
-}
 
-resource "aws_iam_role" "_" {
-  name = "moggiez_${var.name}_execution_role"
-  assume_role_policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Action" : "sts:AssumeRole",
-        "Principal" : {
-          "Service" : "lambda.amazonaws.com"
-        },
-        "Effect" : "Allow",
-        "Sid" : ""
-      }
-    ]
-  })
-  managed_policy_arns = var.policies
+  depends_on = [
+    aws_iam_role_policy_attachment.lambda_logs,
+    aws_cloudwatch_log_group.cw_log_group,
+  ]
 }
